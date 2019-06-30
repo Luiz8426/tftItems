@@ -5,12 +5,10 @@
     </head>
     <body style="margin:0;background-color:#cecece;height:100vh">
         <div style="width:700px;margin-left: auto;margin-right: auto;background-color:#ffffff;border-radius:10px">
-            <div id='baseItems' style="width: 600px;margin-left: auto;margin-right: auto;background-color:#ffffff;margin-top:20px">
+            <div id='baseItems' style="width: 600px;margin-left: auto;margin-right: auto;background-color:#ffffff;margin-top:20px;padding-top:20px;padding-bottom:10px">
             </div>
-            <div id='availableItems' style="margin-top:20px;width: 600px;margin-left: auto;margin-right: auto">
+            <div id='availableItems' style="width: 600px;margin-left: auto;margin-right: auto">
             </div>
-        
-
         </div>
     </body>
     <script>
@@ -111,7 +109,7 @@
             $("#availableItems").html("")
             for(let i=0;i<availableItems.length;i++){
                 $(`#availableItems`).append(`
-                <div style="width:100%;text-align: center;margin-bottom:20px" >
+                <div style="width:100%;text-align: center;padding-top:15px" >
                     <div style="width:300px;margin-left:auto;margin-right:auto">
                         <img id="${availableItems[i].name}" src="${availableItems[i].url}" style="border-right:25px solid #ffffff"/>
                         <img id="${availableItems[i].name}" src="${availableItems[i].item1url}"/>
@@ -121,6 +119,8 @@
                 </div>
                 `)
             }
+            if(availableItems.length>0)
+            $(`#availableItems`).append(`<div style="height:20px"></div>`)
         }
         function getAvailableItems(){
             
