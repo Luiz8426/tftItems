@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    </head>
+    <body style="margin:0;background-color:#cecece;height:100vh">
+        <div style="width:700px;margin-left: auto;margin-right: auto;background-color:#ffffff;border-radius:10px">
+            <div id='baseItems' style="width: 600px;margin-left: auto;margin-right: auto;background-color:#ffffff;margin-top:20px">
+            </div>
+            <div id='availableItems' style="margin-top:20px;width: 600px;margin-left: auto;margin-right: auto">
+            </div>
+        
+
+        </div>
+    </body>
+    <script>
+        let baseItems=[
+            {name:'Espada G.p.C.', url:'https://cdn.leagueofgraphs.com/img/tft/items/1.png',ativo:false,double:false},
+            {name:'Arco Recurvo', url:'https://cdn.leagueofgraphs.com/img/tft/items/2.png',ativo:false,double:false},
+            {name:'Bastão Desnecessariamente Grande', url:'https://cdn.leagueofgraphs.com/img/tft/items/3.png',ativo:false,double:false},
+            {name:'Lagrima da Deusa', url:'https://cdn.leagueofgraphs.com/img/tft/items/4.png',ativo:false,double:false},
+            {name:'Cota de Malha', url:'https://cdn.leagueofgraphs.com/img/tft/items/5.png',ativo:false,double:false},
+            {name:'Capa Negatron', url:'https://cdn.leagueofgraphs.com/img/tft/items/6.png',ativo:false,double:false},
+            {name:'Cinto do Gigante', url:'https://cdn.leagueofgraphs.com/img/tft/items/7.png',ativo:false,double:false},
+            {name:'Espátula', url:'https://cdn.leagueofgraphs.com/img/tft/items/8.png',ativo:false,double:false},
+        ];
+        let combinedItems=[
+            {name:'Gume do Infito',
+            url:'https://cdn.leagueofgraphs.com/img/tft/items/11.png',item1:'Espada G.p.C.', item2:'Espada G.p.C.',desc:'Acertos Críticos causam +100.0% de dano'},
+            {name:'Espada do Divino',
+            url:'https://cdn.leagueofgraphs.com/img/tft/items/12.png',item1:'Espada G.p.C.', item2:'Arco Recurvo',desc:'A cada segundo, o usuário tem 5.0% de chance de receber 100% de Acerto Crítico'},
+            {name:'Pistola Laminar Hextec',
+            url:'https://cdn.leagueofgraphs.com/img/tft/items/13.png',item1:'Espada G.p.C.', item2:'Bastão Desnecessariamente Grande',desc:'Cura em 25.0% de todo o dano causado'},
+            {name:'Lança de Shojin',
+            url:'https://cdn.leagueofgraphs.com/img/tft/items/14.png',item1:'Espada G.p.C.',item2:'Lagrima da Deusa',desc:'Depois de conjurar, o usuário recebe 20.0% da sua Mana máxima por ataque'},
+            {name:'Anjo Guardião',
+            url:'https://cdn.leagueofgraphs.com/img/tft/items/15.png',item1:'Espada G.p.C.',item2:'Cota de Malha',desc:'Usuário ressuscita com 300.0 de Vida'},
+            {name:'A Sedenta por Sangue',
+            url:'https://cdn.leagueofgraphs.com/img/tft/items/16.png',item1:'Espada G.p.C.',item2:'Capa Negatron',desc:'Ataques curam em 35% do dano'},
+            {name:'Arauto de Zeke',url:'https://cdn.leagueofgraphs.com/img/tft/items/17.png',
+            item1:'Espada G.p.C.',item2:'Cinto do Gigante',desc:'Aliados adjacentes recebem +20.0% de Velocidade de Ataque'},
+            {name:'Lâmina Fantasma de Youmuu',url:'https://cdn.leagueofgraphs.com/img/tft/items/18.png',
+            item1:'Espada G.p.C.',item2:'Espátula',desc:'Usuário também é um Assassino'},
+            {name:'Canhão Fumegante',url:'https://cdn.leagueofgraphs.com/img/tft/items/22.png',
+            item1:'Arco Recurvo',item2:'Arco Recurvo',desc:'Os ataques do usuário não podem ser esquivados. Alcance de Ataque dobrado'},
+            {name:'Lâmina da Fúria de Guinsoo',url:'https://cdn.leagueofgraphs.com/img/tft/items/23.png',
+            item1:'Arco Recurvo',item2:'Bastão Desnecessariamente Grande',desc:'Ataques concedem 3.0% de Velocidade de Ataque. Acumula infinitamente'},
+            {name:'Faca de Statikk',url:'https://cdn.leagueofgraphs.com/img/tft/items/24.png',
+            item1:'Arco Recurvo',item2:'Lagrima da Deusa',desc:'O 3º ataque causa 100.0 de Dano Mágico de dispersão'},
+            {name:'Dançarina Fantasma',url:'https://cdn.leagueofgraphs.com/img/tft/items/25.png',
+            item1:'Arco Recurvo',item2:'Cota de Malha',desc:'Usuário esquiva de todos os Acertos Críticos'},
+            {name:'Lâmina Amaldiçoada',url:'https://cdn.leagueofgraphs.com/img/tft/items/26.png',
+            item1:'Arco Recurvo',item2:'Capa Negatron',desc:'Ataques têm uma chance baixa de Diminuir (reduzir o nível de estrela do inimigo em 1)'},
+            {name:'Hidra Titânica',url:'https://cdn.leagueofgraphs.com/img/tft/items/27.png',
+            item1:'Arco Recurvo',item2:'Cinto do Gigante',desc:'Ataques causam dano de dispersão de 10.0% da Vida máxima do usuário'},
+            {name:'Espada do Rei Destruido',url:'https://cdn.leagueofgraphs.com/img/tft/items/28.png',
+            item1:'Arco Recurvo',item2:'Espátula',desc:'Usuário também é um Mestre das Lâminas'},
+            {name:'Capuz da Morte de Rabadon',url:'https://cdn.leagueofgraphs.com/img/tft/items/33.png',
+            item1:'Bastão Desnecessariamente Grande',item2:'Bastão Desnecessariamente Grande',desc:'O atributo de dano com habilidades do usuário é amplificado em 50.0%'},
+            {name:'Eco de Luden',url:'https://cdn.leagueofgraphs.com/img/tft/items/34.png',
+            item1:'Bastão Desnecessariamente Grande',item2:'Lagrima da Deusa',desc:'Habilidades causam 100.0 de dano de dispersão ao contato'},
+            {name:'Medalhão dos Solari de Ferro',url:'https://cdn.leagueofgraphs.com/img/tft/items/35.png',
+            item1:'Bastão Desnecessariamente Grande',item2:'Cota de Malha',desc:'No início do combate, todos os aliados adjacentes recebem um escudo de 200.0'},
+            {name:'Centelha Iõnica',url:'https://cdn.leagueofgraphs.com/img/tft/items/36.png',
+            item1:'Bastão Desnecessariamente Grande',item2:'Capa Negatron',desc:'Sempre que um inimigo conjurar uma habilidade, ele sofre 100.0 de dano'},
+            {name:'Morellonomicon',url:'https://cdn.leagueofgraphs.com/img/tft/items/37.png',
+            item1:'Bastão Desnecessariamente Grande',item2:'Cinto do Gigante',desc:'Habilidades causam dano de queimadura igual a 5.0% da Vida máxima do inimigo por segundo'},
+            {name:'Yuumi',url:'https://cdn.leagueofgraphs.com/img/tft/items/38.png',
+            item1:'Bastão Desnecessariamente Grande',item2:'Espátula',desc:'Usuário também é um Feiticeiro'},
+            {name:'Abraço de Seraph',url:'https://cdn.leagueofgraphs.com/img/tft/items/44.png',
+            item1:'Lagrima da Deusa',item2:'Lagrima da Deusa',desc:'Recupera 20.0 de Mana cada vez que uma habilidade é conjurada'},
+            {name:'Coração Congelado',url:'https://cdn.leagueofgraphs.com/img/tft/items/45.png',
+            item1:'Lagrima da Deusa',item2:'Cota de Malha',desc:'Inimigos adjacentes perdem 20.0% de Velocidade de Ataque'},
+            {name:'Quietude',url:'https://cdn.leagueofgraphs.com/img/tft/items/46.png',
+            item1:'Lagrima da Deusa',item2:'Capa Negatron',desc:'Ataques têm alta chance de causarem Silêncio'},
+            {name:'Redenção',url:'https://cdn.leagueofgraphs.com/img/tft/items/47.png',
+            item1:'Lagrima da Deusa',item2:'Cinto do Gigante',desc:'Ao morrer, cura todos os aliados próximos em 1000.0 de Vida'},
+            {name:'Darkin',url:'https://cdn.leagueofgraphs.com/img/tft/items/48.png',
+            item1:'Lagrima da Deusa',item2:'Espátula',desc:'Usuário também é um Demônio'},
+            {name:'Armadura de Espinhos',url:'https://cdn.leagueofgraphs.com/img/tft/items/55.png',
+            item1:'Cota de Malha',item2:'Cota de Malha',desc:'Reflete 25.0% do dano sofrido por ataques'},
+            {name:'Quebra-espada',url:'https://cdn.leagueofgraphs.com/img/tft/items/56.png',
+            item1:'Cota de Malha',item2:'Capa Negatron',desc:'Ataques têm uma chance de desarmar'},
+            {name:'Efeito Vermelho',url:'https://cdn.leagueofgraphs.com/img/tft/items/57.png',
+            item1:'Cota de Malha',item2:'Cinto do Gigante',desc:'Ataques causam 2.5% de dano de queimadura'},
+            {name:'Juramento do Cavaleiro',url:'https://cdn.leagueofgraphs.com/img/tft/items/58.png',
+            item1:'Cota de Malha',item2:'Espátula',desc:'Usuário também é um Cavaleiro'},
+            {name:'Garra do Dragão',url:'https://cdn.leagueofgraphs.com/img/tft/items/66.png',
+            item1:'Capa Negatron',item2:'Capa Negatron',desc:'Recebe 83.0% de Resistência a Dano Mágico'},
+            {name:'Zéfiro',url:'https://cdn.leagueofgraphs.com/img/tft/items/67.png',
+            item1:'Capa Negatron',item2:'Cinto do Gigante',desc:'No início do combate, bane um inimigo por 5.0s'},
+            {name:'Furacão de Runaan',url:'https://cdn.leagueofgraphs.com/img/tft/items/68.png',
+            item1:'Capa Negatron',item2:'Espátula',desc:'Ataques atingem 2.0 inimigos adicionais. Esses ataques adicionais causam 50.0% de dano'},
+            {name:'Armadura de Warmog',url:'https://cdn.leagueofgraphs.com/img/tft/items/77.png',
+            item1:'Cinto do Gigante',item2:'Cinto do Gigante',desc:'Usuário regenera 2.5% da Vida máxima por segundo'},
+            {name:'Malho Congelado',url:'https://cdn.leagueofgraphs.com/img/tft/items/78.png',
+            item1:'Cinto do Gigante',item2:'Espátula',desc:'Usuário também é um Glacial'},
+            {name:'Força da Natureza',url:'https://cdn.leagueofgraphs.com/img/tft/items/88.png',
+            item1:'Espátula',item2:'Espátula',desc:'Recebe +1.0 de tamanho da equipe'},
+        ]
+        let availableItems=[]
+        
+        $(document).ready(function() {
+            render()
+        });
+        function render(){
+            $("#baseItems").html("")
+            for(let i=0;i<baseItems.length;i++){
+                $('#baseItems').append(`<img id="${baseItems[i].name}" src="${baseItems[i].url}" style="${baseItems[i].double?'filter:grayscale(0%);border:5px solid #ff0000':baseItems[i].ativo?'filter:grayscale(0%);border:5px solid #ffffff':'filter:grayscale(100%);border:5px solid #ffffff'}"  onclick=mudar(${i}) />`)
+            }
+            $("#availableItems").html("")
+            for(let i=0;i<availableItems.length;i++){
+                $(`#availableItems`).append(`
+                <div style="width:100%;text-align: center;margin-bottom:20px" >
+                    <div style="width:300px;margin-left:auto;margin-right:auto">
+                        <img id="${availableItems[i].name}" src="${availableItems[i].url}" style="border-right:25px solid #ffffff"/>
+                        <img id="${availableItems[i].name}" src="${availableItems[i].item1url}"/>
+                        <img id="${availableItems[i].name}" src="${availableItems[i].item2url}"/>
+                    </div>
+                    ${availableItems[i].desc}
+                </div>
+                `)
+            }
+        }
+        function getAvailableItems(){
+            
+            availableItems=[]
+            for(let i=0;i<combinedItems.length;i++){
+                let item1=false
+                let item2=false
+                let double=false
+                
+                for(let j=0;j<baseItems.length;j++){
+                    if(combinedItems[i].item1==combinedItems[i].item2&&baseItems[j].double&&!item1&&!item2)
+                        double=baseItems[j].name
+                    if(combinedItems[i].item1==baseItems[j].name){
+                        if(baseItems[j].ativo){
+                            item1=true
+                            combinedItems[i].item1url=baseItems[j].url
+                        }
+                    }
+                    if(combinedItems[i].item2==baseItems[j].name){
+                        if(baseItems[j].ativo){
+                            item2=true
+                            combinedItems[i].item2url=baseItems[j].url
+                        }
+                    }
+                }
+                
+                if(item1&&item2){
+                    console.log(double,combinedItems[i].item1)
+                    if(combinedItems[i].item1==combinedItems[i].item2){
+                        if(double==combinedItems[i].item1)
+                            availableItems.push(combinedItems[i])
+                    }else{
+                        availableItems.push(combinedItems[i])
+                    }
+                }
+            }
+        }
+        function mudar(i){
+            if(baseItems[i].double){
+                baseItems[i].double=false
+                baseItems[i].ativo=false
+            }else if(baseItems[i].ativo){
+                baseItems[i].double=true
+            }else{
+                baseItems[i].ativo=true
+            }
+            getAvailableItems()
+            render()
+        }
+    </script>
+</html>
+
